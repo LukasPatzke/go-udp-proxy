@@ -12,6 +12,8 @@ import (
 	"sync"
 )
 
+const version = "0.0.2"
+
 // Information maintained for each client/server connection
 type Connection struct {
 	ClientAddr *net.UDPAddr // Address of the client
@@ -153,8 +155,13 @@ func main() {
 	var isport *int = flag.Int("P", 6666, "Server port")
 	var ishost *string = flag.String("H", "localhost", "Server address")
 	var iverb *int = flag.Int("v", 1, "Verbosity (0-6)")
+	var iversion *bool = flag.Bool("version", false, "prints current app version")
 	//	var idrop *float64 = flag.Float64("d", 0.0, "Packet drop rate")
 	flag.Parse()
+	if *iversion {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 	verbosity = *iverb
 	if *ihelp {
 		flag.Usage()
